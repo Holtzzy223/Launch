@@ -13,6 +13,7 @@ public class RotateBody : MonoBehaviour
     void Start()
     {
          forceMag = pe.forceMagnitude;
+        StartCoroutine(SetRotationSpeed(-2f,2f));
     }
 
     // Update is called once per frame
@@ -36,5 +37,12 @@ public class RotateBody : MonoBehaviour
         }
         //pe.forceMagnitude = forceMag * forceMod;
        // Debug.Log("force variation: "+fVar);
+    }
+
+    IEnumerator SetRotationSpeed(float minRot = 1, float maxRot = 2)
+    {
+        yield return new WaitForSeconds(Random.Range(2,5));
+        rotateSpeed = Random.Range(minRot, maxRot);
+       
     }
 }
