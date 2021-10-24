@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PlayerMover : MonoBehaviour
 {
+    public Text popText; 
     public static PlayerMover instance;
     public bool firstPlanetComplete = false;
     public int popSaved;
@@ -32,6 +34,7 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", popSaved, popMax);
         popSaved = Mathf.Clamp(popSaved, 0, popMax);
         GetInput();
         if (firstPlanetComplete)

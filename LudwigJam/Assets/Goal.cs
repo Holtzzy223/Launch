@@ -33,7 +33,7 @@ public class Goal : MonoBehaviour
     {
         PlayerMover player = collision.gameObject.GetComponent<PlayerMover>();
         player.popSaved++;
-        popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", player.popSaved, player.popMax);
+        
         if (player.popSaved >= player.popMax)
         {
             if (player.popMax == 1000)
