@@ -8,8 +8,7 @@ public class Goal : MonoBehaviour
 {
     public Text winText;
     public Text popText;
-    public int popSaved;
-    public int popMax = 1000;
+
     public PointEffector2D pointEffector;
     // Start is called before the first frame update
     void Start()
@@ -27,21 +26,21 @@ public class Goal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}",popSaved,popMax);
-        popSaved = Mathf.Clamp(popSaved, 0, popMax);
+       
+        
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        popSaved++;
-       
-
-        if (popSaved >= popMax)
+        PlayerMover player = collision.gameObject.GetComponent<PlayerMover>();
+        player.popSaved++;
+        popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", player.popSaved, player.popMax);
+        if (player.popSaved >= player.popMax)
         {
-            if (popMax == 1000)
+            if (player.popMax == 1000)
             {
 
                 pointEffector.forceMagnitude = 10;
-                StartCoroutine(IncreasePop());
+                
             }
             else
             {
@@ -50,10 +49,11 @@ public class Goal : MonoBehaviour
             }
         }
     }
-    public IEnumerator IncreasePop()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        popMax+=100;
-
-        yield return new WaitForEndOfFrame();
+        if (PlayerMover.instance.popSaved == 1000)
+        {
+            PlayerMover.instance.StartCoroutine(PlayerMover.instance.IncreasePop());
+        }
     }
 }
