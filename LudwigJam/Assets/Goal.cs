@@ -18,7 +18,8 @@ public class Goal : MonoBehaviour
 
     private void DisplayWin()
     {
-
+        // pop win message
+        // pop stats display
         winText.text = "WINNER WINNER CHICKEN DINNER";
         winText.enabled = true;
     }
@@ -40,6 +41,7 @@ public class Goal : MonoBehaviour
             {
 
                 pointEffector.forceMagnitude = 10;
+                //trigger camera pan/zoom
                 
             }
             else
@@ -54,7 +56,8 @@ public class Goal : MonoBehaviour
         if (PlayerMover.instance.popSaved == 1000&&!PlayerMover.instance.firstPlanetComplete)
         {
             PlayerMover.instance.StartCoroutine(PlayerMover.instance.IncreasePop());
-            
+            PlayerMover.instance.cameraController.ActivateVirtualCamera();
+            Destroy(this.gameObject);
         }
     }
 }

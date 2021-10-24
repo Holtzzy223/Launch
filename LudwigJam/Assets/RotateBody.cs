@@ -12,7 +12,7 @@ public class RotateBody : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-         forceMag = pe.forceMagnitude;
+        forceMag = pe.forceMagnitude;
         StartCoroutine(SetRotationSpeed(-2f,2f));
     }
 
@@ -21,7 +21,6 @@ public class RotateBody : MonoBehaviour
     {
        
         var forceMod = Random.Range(1f,5f);
-       
         var fVar = Mathf.Acos(transform.localRotation.z);
         if (isForceVariable)
         {
@@ -35,14 +34,12 @@ public class RotateBody : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, 0, rotateSpeed));
         }
-        //pe.forceMagnitude = forceMag * forceMod;
-       // Debug.Log("force variation: "+fVar);
+
     }
 
     IEnumerator SetRotationSpeed(float minRot = 1, float maxRot = 2)
     {
         yield return new WaitForSeconds(Random.Range(2,5));
         rotateSpeed = Random.Range(minRot, maxRot);
-       
     }
 }

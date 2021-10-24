@@ -6,11 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMover : MonoBehaviour
 {
-    public Text popText; 
+    public Text popText;
+    public CameraController cameraController;
     public static PlayerMover instance;
     public bool firstPlanetComplete = false;
     public int popSaved;
     public int popMax = 1000;
+
     Rigidbody2D rigidBody;
     int pressCount = 0;
     // Start is called before the first frame update
@@ -37,14 +39,12 @@ public class PlayerMover : MonoBehaviour
         popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", popSaved, popMax);
         popSaved = Mathf.Clamp(popSaved, 0, popMax);
         GetInput();
-
+        Debug.Log(pressCount);
     }
 
     //check input
     public void GetInput()
     {
-        
-
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             pressCount++;
@@ -66,24 +66,26 @@ public class PlayerMover : MonoBehaviour
             rigidBody.AddForceAtPosition(new Vector2(-40-pressCount, 0), Vector2.left);
         }
     }
-    //drop
+
     //camera view
     private void OnBecameInvisible()
     {
-
-        string activeScene = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(activeScene);
+        if (!firstPlanetComplete)
+        {
+            string activeScene = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(activeScene);
+        }
     }
     public IEnumerator IncreasePop()
     {
         Goal[] goals = FindObjectsOfType<Goal>();
         Debug.Log(goals.Length);
         firstPlanetComplete = true;
-        for (int i = 0; i < goals.Length*10; i++)
+        for (int i = 0; i < goals.Length - 1; i++)
         {
            
-
-            popMax += 100;
+              
+            popMax += 1000;
             yield return new WaitForEndOfFrame();
             
         }
