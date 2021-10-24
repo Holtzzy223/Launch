@@ -37,10 +37,7 @@ public class PlayerMover : MonoBehaviour
         popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", popSaved, popMax);
         popSaved = Mathf.Clamp(popSaved, 0, popMax);
         GetInput();
-        if (firstPlanetComplete)
-        {
-            StartCoroutine(IncreasePop());
-        }
+
     }
 
     //check input
@@ -79,12 +76,17 @@ public class PlayerMover : MonoBehaviour
     }
     public IEnumerator IncreasePop()
     {
-        for (int i = 0; i <= 900; i++)
+        Goal[] goals = FindObjectsOfType<Goal>();
+        Debug.Log(goals.Length);
+        firstPlanetComplete = true;
+        for (int i = 0; i < goals.Length*10; i++)
         {
            
 
             popMax += 100;
             yield return new WaitForEndOfFrame();
+            
         }
+        
     }
 }

@@ -51,9 +51,10 @@ public class Goal : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (PlayerMover.instance.popSaved == 1000)
+        if (PlayerMover.instance.popSaved == 1000&&!PlayerMover.instance.firstPlanetComplete)
         {
             PlayerMover.instance.StartCoroutine(PlayerMover.instance.IncreasePop());
+            
         }
     }
 }
