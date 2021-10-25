@@ -37,7 +37,7 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
         popText.text = string.Format("Pops Rescued: {0:#,###0}/{1:#,###0}", popSaved, popMax);
-        popSaved = Mathf.Clamp(popSaved, 0, popMax);
+        
         GetInput();
         Debug.Log(pressCount);
     }

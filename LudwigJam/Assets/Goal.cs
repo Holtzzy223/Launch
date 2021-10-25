@@ -34,20 +34,20 @@ public class Goal : MonoBehaviour
     {
         PlayerMover player = collision.gameObject.GetComponent<PlayerMover>();
         player.popSaved++;
-        
+        player.popSaved = Mathf.Clamp(player.popSaved,0,player.popMax);
         if (player.popSaved >= player.popMax)
         {
             if (player.popMax == 1000)
             {
 
-                pointEffector.forceMagnitude = 10;
+                this.pointEffector.forceMagnitude = 10;
                 //trigger camera pan/zoom
                 
             }
             else
             {
                 DisplayWin();
-                pointEffector.forceMagnitude = 10;
+                this.pointEffector.forceMagnitude = 10;
             }
         }
     }
