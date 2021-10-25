@@ -8,12 +8,13 @@ public class Goal : MonoBehaviour
 {
     public Text winText;
     public Text popText;
-
+    int maxPops = 1001;
+    int popsAvailable;
     public PointEffector2D pointEffector;
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.popsAvailable = this.maxPops;
     }
 
     private void DisplayWin()
@@ -33,30 +34,42 @@ public class Goal : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         PlayerMover player = collision.gameObject.GetComponent<PlayerMover>();
-        player.popSaved++;
-        player.popSaved = Mathf.Clamp(player.popSaved,0,player.popMax);
-        if (player.popSaved >= player.popMax)
+        this.popsAvailable--;
+        this.popsAvailable = Mathf.Clamp(this.popsAvailable, 0, this.maxPops);
+        if (this.popsAvailable > 0)
         {
-            if (player.popMax == 1000)
+            player.popSaved++;
+        }
+        player.popSaved = Mathf.Clamp(player.popSaved,0,player.popMax);
+        if (this.popsAvailable == 0) 
+        {
+            if (player.popSaved >= player.popMax)
             {
 
                 this.pointEffector.forceMagnitude = 10;
-                //trigger camera pan/zoom
-                
+                if (player.popMax > 1000)
+                {
+                    DisplayWin();
+                }
             }
             else
-            {
-                DisplayWin();
+            {   
                 this.pointEffector.forceMagnitude = 10;
             }
+     
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (PlayerMover.instance.popSaved == 1000&&!PlayerMover.instance.firstPlanetComplete)
+        if (PlayerMover.instance.popSaved == 1000 && !PlayerMover.instance.firstPlanetComplete)
         {
+            //trigger camera pan/zoom
             PlayerMover.instance.StartCoroutine(PlayerMover.instance.IncreasePop());
             PlayerMover.instance.cameraController.ActivateVirtualCamera();
+            Destroy(this.gameObject);
+        }
+        else if (this.popsAvailable <= 0)
+        {
             Destroy(this.gameObject);
         }
     }
