@@ -12,6 +12,7 @@ public class RotateBody : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         forceMag = pe.forceMagnitude;
         StartCoroutine(SetRotationSpeed(-2f,2f));
     }

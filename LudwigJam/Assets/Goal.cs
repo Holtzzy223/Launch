@@ -37,11 +37,11 @@ public class Goal : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         PlayerMover player = collision.gameObject.GetComponent<PlayerMover>();
-        this.popsAvailable--;
+        this.popsAvailable -= 10; ;
         this.popsAvailable = Mathf.Clamp(this.popsAvailable, 0, this.maxPops);
         if (this.popsAvailable > 0)
         {
-            player.popSaved++;
+            player.popSaved+=10;
         }
         player.popSaved = Mathf.Clamp(player.popSaved,0,player.popMax);
         if (this.popsAvailable == 0) 
