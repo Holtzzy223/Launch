@@ -15,8 +15,11 @@ public class Goal : MonoBehaviour
     void Start()
     {
         this.popsAvailable = this.maxPops;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+       
+        spriteRenderer.material.EnableKeyword("_EMISSION");
+        spriteRenderer.material.SetColor("_EmissionColor", Color.green);
     }
-
     private void DisplayWin()
     {
         // pop win message
