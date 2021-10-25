@@ -10,7 +10,7 @@ public class Planet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetSprite();
+        Init();
     }
 
     // Update is called once per frame
@@ -19,9 +19,10 @@ public class Planet : MonoBehaviour
         
     }
 
-    void SetSprite()
+    void Init()
     {
         var rand = Random.Range(0,3);
+        var randScale = Random.Range(1f,2f);
         spriteRenderer.sprite = sprites[rand];
         switch (rand)
         {
@@ -35,5 +36,6 @@ public class Planet : MonoBehaviour
                 spriteRenderer.material = materials[2];
                 break;
         }
+        this.gameObject.transform.localScale *= randScale;
     }
 }
