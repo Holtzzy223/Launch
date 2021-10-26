@@ -57,7 +57,7 @@ public class Goal : MonoBehaviour
             }
             else
             {   
-                this.pointEffector.forceMagnitude = 10;
+                this.pointEffector.forceMagnitude = 30;
             }
      
         }
