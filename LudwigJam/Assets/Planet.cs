@@ -9,7 +9,7 @@ public class Planet : MonoBehaviour
     public Material[] materials;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Init();
     }
