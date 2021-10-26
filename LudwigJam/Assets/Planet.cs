@@ -7,6 +7,7 @@ public class Planet : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Sprite[] sprites;
     public Material[] materials;
+
     // Start is called before the first frame update
     void Start()
     {

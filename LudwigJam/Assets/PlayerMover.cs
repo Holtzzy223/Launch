@@ -12,7 +12,10 @@ public class PlayerMover : MonoBehaviour
     public bool firstPlanetComplete = false;
     public int popSaved;
     public int popMax = 1000;
-
+    public ParticleSystem thursterTop;
+    public ParticleSystem thursterBottom;
+    public ParticleSystem thursterLeft;
+    public ParticleSystem thursterRight;
     Rigidbody2D rigidBody;
     int pressCount = 0;
     // Start is called before the first frame update
@@ -49,19 +52,35 @@ public class PlayerMover : MonoBehaviour
         {
             pressCount++;
             rigidBody.AddForceAtPosition(new Vector2(0,-40-pressCount),Vector2.down);
+            thursterTop.Play();
+            thursterLeft.Stop();
+            thursterRight.Stop();
+            thursterBottom.Stop();
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
+            thursterTop.Stop();
+            thursterLeft.Stop();
+            thursterRight.Stop();
+            thursterBottom.Play();
             pressCount++;
             rigidBody.AddForceAtPosition(new Vector2(0, 40+pressCount), Vector2.down);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            thursterTop.Stop();
+            thursterLeft.Play();
+            thursterRight.Stop();
+            thursterBottom.Stop();
             pressCount++;
             rigidBody.AddForceAtPosition(new Vector2(40+pressCount, 0), Vector2.right);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            thursterTop.Stop();
+            thursterLeft.Stop();
+            thursterRight.Play();
+            thursterBottom.Stop();
             pressCount++;
             rigidBody.AddForceAtPosition(new Vector2(-40-pressCount, 0), Vector2.left);
         }
