@@ -42,6 +42,7 @@ public class Goal : MonoBehaviour
         if (this.popsAvailable > 0)
         {
             player.popSaved+=10;
+            player.slider.value = player.popSaved;
         }
         player.popSaved = Mathf.Clamp(player.popSaved,0,player.popMax);
         if (this.popsAvailable == 0) 

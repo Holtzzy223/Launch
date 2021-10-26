@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMover : MonoBehaviour
 {
     public Text popText;
+    public Slider slider;
     public CameraController cameraController;
     public static PlayerMover instance;
     public bool firstPlanetComplete = false;
@@ -34,6 +35,7 @@ public class PlayerMover : MonoBehaviour
     {
 
         rigidBody = GetComponent<Rigidbody2D>();
+        slider.maxValue = popMax;
     }
 
     // Update is called once per frame
@@ -105,6 +107,7 @@ public class PlayerMover : MonoBehaviour
            
               
             popMax += 1000;
+            slider.maxValue = popMax;
             yield return new WaitForEndOfFrame();
             
         }
